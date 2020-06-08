@@ -1,0 +1,38 @@
+syntax="proto3";
+
+option java_outer_classname ="MyData";
+
+message MyData {
+
+    enum DataType {
+        studentType = 0;
+        teacherType =1;
+    }
+
+    DataType dataType =1;
+
+    oneof dataBody {
+        Student student = 2;
+        Teacher teacher = 3;
+    }
+
+
+
+}
+
+
+message Student {
+
+    int32 id = 1;
+
+    string name = 2;
+
+    int32 age = 3;
+}
+
+
+message Teacher {
+
+    string username = 1;
+
+}

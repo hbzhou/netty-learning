@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var socket;
+    if ("WebSocket" in window){
+        socket = new WebSocket("ws://localhost:8889/hello");
+        socket.onmessage = function (ev) {
+            var rt = document.getElementById("responseText");
+            rt.value = rt.value +"\n" +ev.data;
+        }
+
+        socket.onopen = function (ev) {
+            var rt =  document.getElementById("responseText");
+            rt.value="连接开启了"
+        }
+
+        socket.onclose = function (ev) {
+            var rt = document.getElementById("responseText");
+            rt.value = rt.value +"\n" + "连接关闭了"
+        }
+
+    } else {
+        alert("not supported")
+    }
+
+    function send( message) {
+        if ("WebSocket" in window) {
+            if (socket.readyState == WebSocket.OPEN){
+                socket.send(message)
+            } else {
+                alert("socket 未连接");
+            }
+        }
+
+    }
+
+</script>
+<body>
+ <form onsubmit="return false">
+     <textarea name="message" style="height: 300px; width: 300px"></textarea>
+     <input type="button" value="发送消息" onclick="send(this.form.message.value)">
+     <textarea id="responseText" style="height: 300px; width: 300px"></textarea>
+     <input type="button" value="清空内容" onclick="document.getElementById('responseText').value=''">
+ </form>
+
+
+</body>
+</html>
