@@ -82,3 +82,4 @@ bower_components/
 /*.iml
 /*.factorypath
 /data-sourcing-core/src/main/java/com/refinitiv/edp/datasourcing/core/response/fcs/handler/
+/netty-websocket-server/*.iml
